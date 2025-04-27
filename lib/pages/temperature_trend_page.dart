@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/temperature_provider.dart';
 
+// Page that displays the trend of recent fridge temperatures
 class TemperatureTrendPage extends StatelessWidget {
   const TemperatureTrendPage({super.key});
 
@@ -17,10 +18,12 @@ class TemperatureTrendPage extends StatelessWidget {
     final chartWidth = screenWidth * 0.9;
     final chartHeight = screenHeight * 0.3;
 
+    // Generate spots for the line chart
     final List<FlSpot> spots = [
       for (int i = 0; i < temps.length; i++) FlSpot(i.toDouble(), temps[i].value),
     ];
 
+    // Generate time labels for the x-axis
     final List<String> times = [
       for (int i = 0; i < temps.length; i++)
         '${temps[i].time.hour}:${temps[i].time.minute.toString().padLeft(2, '0')}',

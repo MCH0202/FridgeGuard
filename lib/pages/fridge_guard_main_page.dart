@@ -5,6 +5,7 @@ import 'home_page.dart';
 import 'food_list_page.dart';
 import 'settings_page.dart';
 
+// Main navigation page after login, contains 3 tabs
 class FridgeGuardMainPage extends StatefulWidget {
   const FridgeGuardMainPage({super.key});
 
@@ -13,8 +14,9 @@ class FridgeGuardMainPage extends StatefulWidget {
 }
 
 class _FridgeGuardMainPageState extends State<FridgeGuardMainPage> {
-  int _currentIndex = 0;
+  int _currentIndex = 0; // Currently selected tab index
 
+  // List of pages associated with each tab
   final List<Widget> _pages = [
     const HomePage(),
     const FoodListPage(),
@@ -24,7 +26,10 @@ class _FridgeGuardMainPageState extends State<FridgeGuardMainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Display the selected page based on _currentIndex
       body: _pages[_currentIndex],
+      
+      // Bottom navigation bar for switching between pages
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) => setState(() => _currentIndex = index),
@@ -33,7 +38,10 @@ class _FridgeGuardMainPageState extends State<FridgeGuardMainPage> {
             icon: Icon(Icons.thermostat),
             label: 'Temperature',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Food List'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'Food List',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',

@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../models/scanned_product.dart';
 import 'scan_edit_page.dart';
 
+// Main page to scan barcodes and add scanned food items
 class ScanPage extends StatefulWidget {
   const ScanPage({super.key});
 
@@ -18,13 +19,13 @@ class ScanPage extends StatefulWidget {
 }
 
 class _ScanPageState extends State<ScanPage> {
-  late CameraController _cameraController;
-  bool _isCameraInitialized = false;
-  bool _isShowingManualInputDialog = false;
-  final List<ScannedProduct> _scannedProducts = [];
-  final PanelController _panelController = PanelController();
-  late final BarcodeScanner _barcodeScanner;
-  bool _isDetecting = false;
+  late CameraController _cameraController; // Camera controller
+  bool _isCameraInitialized = false; // Camera initialization status
+  bool _isShowingManualInputDialog = false; // Whether manual input dialog is showing
+  final List<ScannedProduct> _scannedProducts = []; // List of scanned products
+  final PanelController _panelController = PanelController(); // Sliding panel controller
+  late final BarcodeScanner _barcodeScanner; // Barcode scanner instance
+  bool _isDetecting = false; // Barcode detection flag
 
   @override
   void initState() {
@@ -33,6 +34,7 @@ class _ScanPageState extends State<ScanPage> {
     _initializeCamera();
   }
 
+  // Initialize the camera and start image stream
   Future<void> _initializeCamera() async {
     final cameras = await availableCameras();
     final backCamera = cameras.firstWhere(
@@ -100,6 +102,7 @@ class _ScanPageState extends State<ScanPage> {
     }
   }
 
+  // Fetch product name using OpenFoodFacts API
   Future<String?> fetchProductName(String barcode) async {
     try {
       final config = ProductQueryConfiguration(
@@ -123,6 +126,7 @@ class _ScanPageState extends State<ScanPage> {
     }
   }
 
+  // Show manual input dialog if barcode product is not found
   Future<void> _promptForManualName(String barcode) async {
     if (_isShowingManualInputDialog) return;
     _isShowingManualInputDialog = true;
@@ -210,6 +214,7 @@ class _ScanPageState extends State<ScanPage> {
     );
   }
 
+  // Build sliding up panel showing list of scanned products
   Widget _buildPanel(BuildContext context, ScrollController scrollController) {
     return Column(
       children: [
@@ -236,6 +241,8 @@ class _ScanPageState extends State<ScanPage> {
           ),
         ),
         const SizedBox(height: 6),
+
+        // ListView showing scanned items
         Expanded(
           child: ListView.builder(
             controller: scrollController,
@@ -288,7 +295,10 @@ class _ScanPageState extends State<ScanPage> {
             },
           ),
         ),
+
         const SizedBox(height: 12),
+
+        // Upload button
         ElevatedButton.icon(
           icon: const Icon(Icons.cloud_upload),
           label: const Text('Add item(s)'),
@@ -323,6 +333,7 @@ class _ScanPageState extends State<ScanPage> {
             }
           },
         ),
+
         const SizedBox(height: 20),
       ],
     );

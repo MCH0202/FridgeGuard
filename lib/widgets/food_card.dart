@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
+// A card widget displaying a food item and its expiration status
 class FoodCard extends StatelessWidget {
-  final String name;
-  final Timestamp? expiryDate;
-  final VoidCallback onDelete;
-  final Brightness brightness;
+  final String name; // Name of the food item
+  final Timestamp? expiryDate; // Expiry date from Firestore
+  final VoidCallback onDelete; // Callback to delete the item
+  final Brightness brightness; // Current theme brightness
 
   const FoodCard({
     super.key,
@@ -16,6 +17,7 @@ class FoodCard extends StatelessWidget {
     required this.brightness,
   });
 
+  // Format the expiry date for display
   String formatExpiry(Timestamp? expiryTimestamp) {
     if (expiryTimestamp == null) return 'No expiry date';
 
@@ -36,18 +38,19 @@ class FoodCard extends StatelessWidget {
     }
   }
 
-List<Color> getGradientColors(int diff) {
-  final isDark = brightness == Brightness.dark;
-  final base = isDark ? Colors.black : Colors.white;
+  // Determine the gradient colors based on expiry status
+  List<Color> getGradientColors(int diff) {
+    final isDark = brightness == Brightness.dark;
+    final base = isDark ? Colors.black : Colors.white;
 
-  if (diff < 0) {
-    return [base, Colors.red.withAlpha((0.4 * 255).toInt())];
-  } else if (diff <= 2) {
-    return [base, Colors.orange.withAlpha((0.4 * 255).toInt())];
-  } else {
-    return [base, Colors.green.withAlpha((0.4 * 255).toInt())];
+    if (diff < 0) {
+      return [base, Colors.red.withAlpha((0.4 * 255).toInt())];
+    } else if (diff <= 2) {
+      return [base, Colors.orange.withAlpha((0.4 * 255).toInt())];
+    } else {
+      return [base, Colors.green.withAlpha((0.4 * 255).toInt())];
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +78,7 @@ List<Color> getGradientColors(int diff) {
         subtitle: Text(formatExpiry(expiryDate)),
         trailing: IconButton(
           icon: const Icon(Icons.delete),
-          onPressed: onDelete,
+          onPressed: onDelete, // Delete button for the food item
         ),
       ),
     );

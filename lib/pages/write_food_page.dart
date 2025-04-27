@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+// Page for manually adding new food items
 class WriteFoodPage extends StatefulWidget {
   const WriteFoodPage({super.key});
 
@@ -11,20 +12,24 @@ class WriteFoodPage extends StatefulWidget {
 }
 
 class _WriteFoodPageState extends State<WriteFoodPage> {
-  String selectedStorage = '';
-  String selectedExpiry = '';
+  String selectedStorage = ''; // Selected storage type: fridge or freezer
+  String selectedExpiry = ''; // Selected expiration option
 
+  // Predefined options for fridge and freezer storage
   final fridgeOptions = ['+3 days', '+14 days', 'Custom'];
   final freezerOptions = ['+1 month', '+6 months', 'Custom'];
 
+  // Dynamically select options based on current selected storage
   List<String> get currentOptions =>
       selectedStorage == 'freezer' ? freezerOptions : fridgeOptions;
 
-  final nameController = TextEditingController();
+  final nameController = TextEditingController(); // Controller for food name input
 
+  // Format custom picked date
   String get formattedCustomDate =>
       selectedExpiry.contains('.') ? selectedExpiry : '';
 
+  // Show a missing information warning dialog
   void showMissingDialog(BuildContext context, String title, String message) {
     showDialog(
       context: context,
@@ -43,8 +48,7 @@ class _WriteFoodPageState extends State<WriteFoodPage> {
 
   @override
   Widget build(BuildContext context) {
-    final nonCustomOptions =
-        currentOptions.where((o) => o != 'Custom').toList();
+    final nonCustomOptions = currentOptions.where((o) => o != 'Custom').toList();
     final isCustomSelected =
         selectedExpiry != '' &&
         !fridgeOptions.contains(selectedExpiry) &&
@@ -58,6 +62,7 @@ class _WriteFoodPageState extends State<WriteFoodPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Input field for food name
             TextField(
               controller: nameController,
               decoration: InputDecoration(
@@ -70,6 +75,8 @@ class _WriteFoodPageState extends State<WriteFoodPage> {
               ),
             ),
             const SizedBox(height: 28),
+
+            // Storage type selection (Fridge or Freezer)
             const Text('Add to', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             const SizedBox(height: 12),
             Row(
@@ -81,8 +88,7 @@ class _WriteFoodPageState extends State<WriteFoodPage> {
                   child: ChoiceChip(
                     showCheckmark: false,
                     label: Padding(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                       child: Text('My $type'),
                     ),
                     selected: isSelected,
@@ -93,11 +99,14 @@ class _WriteFoodPageState extends State<WriteFoodPage> {
               }).toList(),
             ),
             const SizedBox(height: 28),
+
+            // Expiration date selection
             const Text('Select an expiration date', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             const SizedBox(height: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                // Predefined expiration options
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: nonCustomOptions.map((option) {
@@ -118,6 +127,8 @@ class _WriteFoodPageState extends State<WriteFoodPage> {
                   }).toList(),
                 ),
                 const SizedBox(height: 16),
+
+                // Custom expiration date picker
                 Center(
                   child: ChoiceChip(
                     showCheckmark: false,
@@ -146,6 +157,8 @@ class _WriteFoodPageState extends State<WriteFoodPage> {
               ],
             ),
             const SizedBox(height: 40),
+
+            // Add food item button
             SizedBox(
               width: double.infinity,
               height: 50,
@@ -156,6 +169,7 @@ class _WriteFoodPageState extends State<WriteFoodPage> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
                 ),
                 onPressed: () async {
+                  // Validation checks
                   if (selectedStorage.isEmpty) {
                     showMissingDialog(context, 'Missing inventory', 'Please select an inventory to add the food item to.');
                     return;
@@ -171,6 +185,7 @@ class _WriteFoodPageState extends State<WriteFoodPage> {
 
                   final name = nameController.text.trim();
 
+                  // Calculate expiration date based on selection
                   DateTime expiryDate;
                   if (selectedExpiry.startsWith('+')) {
                     final parts = selectedExpiry.split(' ');
@@ -191,6 +206,7 @@ class _WriteFoodPageState extends State<WriteFoodPage> {
                   final uid = FirebaseAuth.instance.currentUser?.uid;
 
                   try {
+                    // Add food item to Firestore
                     await FirebaseFirestore.instance.collection('foods').add({
                       'name': name,
                       'storage': selectedStorage,
@@ -200,10 +216,12 @@ class _WriteFoodPageState extends State<WriteFoodPage> {
                       'userId': uid,
                     });
                     if (!context.mounted) return;
+                    // Show success message
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Item "$name" added to $selectedStorage.')),
                     );
 
+                    // Reset form fields
                     setState(() {
                       nameController.clear();
                       selectedStorage = '';
@@ -211,6 +229,7 @@ class _WriteFoodPageState extends State<WriteFoodPage> {
                     });
                   } catch (e) {
                     if (!context.mounted) return;
+                    // Show failure message
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Failed to add item: $e')),
                     );

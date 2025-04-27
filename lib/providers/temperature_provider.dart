@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 
-// ➊ 新增一个温度记录类
+// temperture recoder
 class TempRecord {
   final double value;
   final DateTime time;
@@ -36,13 +36,13 @@ class TemperatureProvider extends ChangeNotifier {
     try {
       await client.connect();
     } catch (e) {
-      if (kDebugMode) print('MQTT连接失败: $e');
+      if (kDebugMode) print('MQTT connection fail: $e');
       client.disconnect();
       return;
     }
 
     if (client.connectionStatus!.state == MqttConnectionState.connected) {
-      if (kDebugMode) print('✅ MQTT连接成功');
+      if (kDebugMode) print('MQTT connected');
 
       client.subscribe('/fridgeguard/test/message', MqttQos.atLeastOnce);
 
@@ -50,7 +50,7 @@ class TemperatureProvider extends ChangeNotifier {
         final recMess = c[0].payload as MqttPublishMessage;
         final payload =
             MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
-        if (kDebugMode) print('📩 收到温度: $payload');
+        if (kDebugMode) print('temperature: $payload');
 
         final parsedTemp = double.tryParse(payload.trim());
         if (parsedTemp != null) {
@@ -58,7 +58,7 @@ class TemperatureProvider extends ChangeNotifier {
         }
       });
     } else {
-      if (kDebugMode) print('MQTT连接失败: ${client.connectionStatus}');
+      if (kDebugMode) print('MQTT connection fail: ${client.connectionStatus}');
       client.disconnect();
     }
   }
@@ -70,12 +70,12 @@ class TemperatureProvider extends ChangeNotifier {
   void updateTemperature(double newTemp) {
     currentTemp = newTemp;
 
-    // ➔ 记录温度和时间
+    // record time and temperature
     lastFiveTemps.add(TempRecord(newTemp, DateTime.now()));
     if (lastFiveTemps.length > 5) {
       lastFiveTemps.removeAt(0);
     }
 
-    notifyListeners(); // 通知 UI 刷新
+    notifyListeners(); // refreash UI
   }
 }

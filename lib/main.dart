@@ -8,15 +8,15 @@ import 'pages/fridge_guard_main_page.dart';
 import 'providers/temperature_provider.dart';
 import 'providers/food_list_provider.dart';
 import 'providers/theme_provider.dart';
-import 'package:openfoodfacts/openfoodfacts.dart'; // ✅ 新增
+import 'package:openfoodfacts/openfoodfacts.dart'; 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // ✅ 初始化 Firebase
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  // ✅ 设置 OpenFoodFacts 的配置
+  // setting the account info for openfoodapi
   OpenFoodAPIConfiguration.userAgent = UserAgent(
     name: 'FridgeGuard',
     version: '1.0.0',
@@ -40,14 +40,14 @@ class FridgeGuardApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => FoodListProvider()),
       ],
       child: Builder(
-        // 👈 关键点！用 Builder 包裹 MaterialApp
+        
         builder: (context) {
           final themeProvider = context.watch<ThemeProvider>();
           return MaterialApp(
             title: 'FridgeGuard',
             theme: ThemeData.light(),
             darkTheme: ThemeData.dark(),
-            themeMode: themeProvider.themeMode, // ✅ 此时上下文已经有 Provider
+            themeMode: themeProvider.themeMode, 
             home: const AuthGate(),
           );
         },

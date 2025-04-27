@@ -1,7 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/scanned_product.dart';
 
+// Page for editing a scanned product's details
 class ScanEditPage extends StatefulWidget {
   final ScannedProduct product;
 
@@ -16,9 +18,11 @@ class _ScanEditPageState extends State<ScanEditPage> {
   late String selectedStorage;
   late String selectedExpiry;
 
+  // Predefined options for fridge and freezer storage durations
   final fridgeOptions = ['+3 days', '+14 days', 'Custom'];
   final freezerOptions = ['+1 month', '+6 months', 'Custom'];
 
+  // Return storage options based on selected storage type
   List<String> get currentOptions =>
       selectedStorage == 'freezer' ? freezerOptions : fridgeOptions;
 
@@ -47,6 +51,7 @@ class _ScanEditPageState extends State<ScanEditPage> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
+            // Input for product name
             TextField(
               controller: nameController,
               decoration: InputDecoration(
@@ -57,6 +62,8 @@ class _ScanEditPageState extends State<ScanEditPage> {
               ),
             ),
             const SizedBox(height: 28),
+
+            // Storage type selection
             const Text('Select Storage'),
             const SizedBox(height: 12),
             Row(
@@ -74,6 +81,8 @@ class _ScanEditPageState extends State<ScanEditPage> {
               }).toList(),
             ),
             const SizedBox(height: 28),
+
+            // Expiration date selection
             const Text('Select Expiration'),
             const SizedBox(height: 12),
             Row(
@@ -90,6 +99,8 @@ class _ScanEditPageState extends State<ScanEditPage> {
               }).toList(),
             ),
             const SizedBox(height: 16),
+
+            // Custom expiration date picker
             ChoiceChip(
               label: Text(customLabel),
               selected: isCustomSelected || selectedExpiry == 'Custom',
@@ -109,6 +120,8 @@ class _ScanEditPageState extends State<ScanEditPage> {
               },
             ),
             const SizedBox(height: 40),
+
+            // Action buttons (Cancel / Save)
             Row(
               children: [
                 Expanded(
@@ -132,6 +145,7 @@ class _ScanEditPageState extends State<ScanEditPage> {
                         return;
                       }
 
+                      // Calculate expiration date
                       DateTime expiryDate;
                       if (selectedExpiry.startsWith('+')) {
                         final parts = selectedExpiry.split(' ');
@@ -146,6 +160,7 @@ class _ScanEditPageState extends State<ScanEditPage> {
                             DateFormat('yyyy.MM.dd').parse(selectedExpiry);
                       }
 
+                      // Return updated product data
                       final result = ScannedProduct(
                         barcode: widget.product.barcode,
                         name: name,
