@@ -4,13 +4,44 @@ import '../providers/temperature_provider.dart';
 import 'temperature_trend_page.dart';
 
 // Home page displaying the current fridge temperature
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool _hasShownOverheatAlert = false; // Flag to prevent repeated alerts
 
   @override
   Widget build(BuildContext context) {
     // Retrieve the current temperature from the provider
     final temp = context.watch<TemperatureProvider>().currentTemp;
+
+    // Check if temperature exceeds threshold and alert has not been shown
+    if (temp > 8 && !_hasShownOverheatAlert) {
+      Future.delayed(Duration.zero, () {
+        if (mounted) {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text('Temperature Warning'),
+              content: Text('Fridge temperature is too high! Current: ${temp.toStringAsFixed(1)}°C'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          );
+          _hasShownOverheatAlert = true; // Mark as shown
+        }
+      });
+    }
 
     return Scaffold(
       appBar: AppBar(title: const Text('FridgeGuard')),
