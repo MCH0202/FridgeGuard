@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "128607126061",
+    "project_id": "fridgeguard-1fce9",
+    "storage_bucket": "fridgeguard-1fce9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128607126061:android:6a7d9999b18fb57871eea4",
+        "android_client_info": {
+          "package_name": "com.example.fridgeguard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWkm7W83g3xB9Trs2AuyDHXzUnk4ewKtI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
