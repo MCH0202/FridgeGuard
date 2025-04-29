@@ -73,13 +73,30 @@ Developed for the CASA0015 Final Assessment.
 
 ## 🚀 Installation
 
-### Prerequisites
+You can either **run the app locally using Flutter**, or **directly download and install the APK file** from the Releases page.
 
-- Flutter SDK >= 3.10.0  
-- Dart >= 3.1  
-- Firebase CLI (for setup)  
+---
 
-### Steps
+### 📥 Option 1: Download APK (Recommended for Mobile Users)
+
+- Go to the [Releases](https://github.com/MCH0202/FridgeGuard/releases) section.
+- Download the latest version **FridgeGuard_v1.0.3.apk**.
+- Transfer and install the APK on your Android device.
+
+> ⚡ Make sure your device allows installation from unknown sources.
+
+---
+
+### 💻 Option 2: Run Locally with Flutter (For Developers)
+
+#### Prerequisites:
+
+- Flutter SDK >= 3.10.0 installed ([Flutter installation guide](https://docs.flutter.dev/get-started/install))
+- Dart >= 3.1 installed
+- Firebase CLI installed (`npm install -g firebase-tools`)
+- Android Studio / Xcode with emulator or real device connected
+
+#### Steps:
 
 ```bash
 git clone https://github.com/MCH0202/FridgeGuard.git
