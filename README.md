@@ -1,23 +1,85 @@
-# FridgeGuard
+# 🧊 FridgeGuard
 
-This is the Final assessment template for CASA0014 - Please use this template and edit the relevant sections to personalise.
-This section has a short introduction to what the application is
+A smart mobile app to monitor fridge temperature and track food expiry 📱🥦  
+Developed for the CASA0015 Final Assessment.
 
-## Use this README File 
+👉 [Landing Page](https://github.com/MCH0202/FridgeGuard/blob/main/landing_page/home.html)  
+👉 [Presentation Video](https://github.com/MCH0202/FridgeGuard#demo-video)
 
-Use this section to show us what your Mobile App is about.   Include a Screenshot to the App, link to the various frameworks you've used. Include your presentation video here that shows off your Mobile App.   Emojis are also fun to include 📱 😄
+---
 
-Look at some other Flutter Apps online and see how they use there README File.  Good examples are:
+## 🔍 Overview
 
-- https://github.com/miickel/flutter_particle_clock
-- https://github.com/Tarikul711/flutter-food-delivery-app-ui    
-- https://github.com/mohak1283/Instagram-Clone
+**FridgeGuard** helps users:
+- Track food expiry dates with color-coded reminders
+- Monitor real-time fridge temperature via MQTT
+- Reduce food waste and promote sustainability
 
+---
 
-## Include A Section That Tells Developers How To Install The App
+## 📸 Screenshots
 
-Include a section that gives intructions on how to install the app or run it in Flutter.  What versions of the plugins are you assuming?  Maybe define a licence
+### 🏠 Home Page – Temperature Display
+![homepage](./landing_page/images/homepage.png)
 
-##  Contact Details
+### 📋 Food List – Expiry Status
+![foodlist](./landing_page/images/foodlist.png)
 
-Having Contact Details is also good as it shows people how to get in contact with you if they'd like to contribute to the app. 
+### ✍️ Write Page – Manual Entry
+![writepage](./landing_page/images/writepage.png)
+
+### 📷 Scan Page – Barcode Lookup
+![scanpage](./landing_page/images/scanpage.png)
+
+### ⚙️ Settings
+![settingpage](./landing_page/images/settingpage.png)
+
+---
+
+## 🧪 Features in Action
+
+### 👤 Register Demo
+![register demo](./landing_page/images/register.gif)
+
+### 🌡️ Temperature Log Page
+![temperaturelog](./landing_page/images/temperaturelog.png)
+
+### 📦 Physical Prototype
+| Front | Inside | Back |
+|-------|--------|------|
+| ![](./landing_page/images/physical_device1.jpg) | ![](./landing_page/images/physical_device2.jpg) | ![](./landing_page/images/physical_device3.jpg) |
+
+---
+
+## 🛠️ Built With
+
+- [Flutter](https://flutter.dev/) – Cross-platform development
+- [Firebase Authentication](https://firebase.google.com/docs/auth) – User login
+- [Cloud Firestore](https://firebase.google.com/docs/firestore) – Food data storage
+- [MQTT Protocol](https://pub.dev/packages/mqtt_client) – Real-time temperature feed
+- [OpenFoodFacts API](https://world.openfoodfacts.org/data) – Barcode lookup
+
+---
+
+## 🎬 Demo Video
+
+> 📺 Watch the full app demonstration in the presentation video:  
+> [Link to demo in presentation](https://github.com/MCH0202/FridgeGuard#demo-video)
+
+---
+
+## 🚀 Installation
+
+### Prerequisites
+
+- Flutter SDK >= 3.10.0
+- Dart >= 3.1
+- Firebase CLI (for setup)
+
+### Steps
+
+```bash
+git clone https://github.com/MCH0202/FridgeGuard.git
+cd FridgeGuard
+flutter pub get
+flutter run
