@@ -19,45 +19,48 @@ Developed for the CASA0015 Final Assessment.
 
 ## 📸 Screenshots
 
-### 🏠 Home Page – Temperature Display
-![homepage](./landing_page/images/homepage.png)
+### 🏠 Home Page – Temperature Display  
+<img src="./landing_page/images/homepage.png" width="300"/>
 
-### 📋 Food List – Expiry Status
-![foodlist](./landing_page/images/foodlist.png)
+### 📋 Food List – Expiry Status  
+<img src="./landing_page/images/foodlist.png" width="300"/>
 
-### ✍️ Write Page – Manual Entry
-![writepage](./landing_page/images/writepage.png)
+### ✍️ Write Page – Manual Entry  
+<img src="./landing_page/images/writepage.png" width="300"/>
 
-### 📷 Scan Page – Barcode Lookup
-![scanpage](./landing_page/images/scanpage.png)
+### 📷 Scan Page – Barcode Lookup  
+<img src="./landing_page/images/scanpage.png" width="300"/>
 
-### ⚙️ Settings
-![settingpage](./landing_page/images/settingpage.png)
+### ⚙️ Settings  
+<img src="./landing_page/images/settingpage.png" width="300"/>
 
 ---
 
 ## 🧪 Features in Action
 
-### 👤 Register Demo
-![register demo](./landing_page/images/register.gif)
+### 👤 Register Demo  
+<img src="./landing_page/images/register.gif" width="300"/>
 
-### 🌡️ Temperature Log Page
-![temperaturelog](./landing_page/images/temperaturelog.png)
+### 🌡️ Temperature Log Page  
+<img src="./landing_page/images/temperaturelog.png" width="300"/>
 
 ### 📦 Physical Prototype
-| Front | Inside | Back |
-|-------|--------|------|
-| ![](./landing_page/images/physical_device1.jpg) | ![](./landing_page/images/physical_device2.jpg) | ![](./landing_page/images/physical_device3.jpg) |
+
+<p align="center">
+  <img src="./landing_page/images/physical_device1.jpg" width="250"/>
+  <img src="./landing_page/images/physical_device2.jpg" width="250"/>
+  <img src="./landing_page/images/physical_device3.jpg" width="250"/>
+</p>
 
 ---
 
 ## 🛠️ Built With
 
-- [Flutter](https://flutter.dev/) – Cross-platform development
-- [Firebase Authentication](https://firebase.google.com/docs/auth) – User login
-- [Cloud Firestore](https://firebase.google.com/docs/firestore) – Food data storage
-- [MQTT Protocol](https://pub.dev/packages/mqtt_client) – Real-time temperature feed
-- [OpenFoodFacts API](https://world.openfoodfacts.org/data) – Barcode lookup
+- [Flutter](https://flutter.dev/) – Cross-platform development  
+- [Firebase Authentication](https://firebase.google.com/docs/auth) – User login  
+- [Cloud Firestore](https://firebase.google.com/docs/firestore) – Food data storage  
+- [MQTT Protocol](https://pub.dev/packages/mqtt_client) – Real-time temperature feed  
+- [OpenFoodFacts API](https://world.openfoodfacts.org/data) – Barcode lookup  
 
 ---
 
@@ -72,9 +75,9 @@ Developed for the CASA0015 Final Assessment.
 
 ### Prerequisites
 
-- Flutter SDK >= 3.10.0
-- Dart >= 3.1
-- Firebase CLI (for setup)
+- Flutter SDK >= 3.10.0  
+- Dart >= 3.1  
+- Firebase CLI (for setup)  
 
 ### Steps
 
