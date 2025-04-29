@@ -4,7 +4,7 @@ A smart mobile app to monitor fridge temperature and track food expiry 📱🥦
 Developed for the CASA0015 Final Assessment.
 
 👉 [Landing Page](https://github.com/MCH0202/FridgeGuard/blob/main/landing_page/home.html)  
-👉 [Presentation Video](https://github.com/MCH0202/FridgeGuard#demo-video)
+👉 [▶️ Watch on YouTube](https://youtube.com/shorts/ofdGUBysSow)
 
 ---
 
